@@ -1,0 +1,23 @@
+{block #content}
+	<section class="new-page secondary-page container">
+		{ifset $new}
+			<h1 n:block="title">{$new->title}</h1>
+			<div class="two-col-grid">
+				<div class="content">
+					{if $new->cover != NULL}
+						<img src="{$basePath}/upload/news/{$new->id}/{$new->cover}" alt="{$new->title}">
+					{else}
+						<img src="{$basePath}/dist/img/nocover.jpeg" alt="{$new->title}">
+					{/if}
+					<div class="date">{$new->created|date:'d. m. Y'}</div>
+					<div>{$new->content|noescape}</div>
+					<a n:href="Homepage:" class="btn btn-outline-primary">Zpět na úvodní stránku</a>
+				</div>
+			</div>
+		{else}
+			<h3>Hledanou aktualitu se nepodařilo zobrazit.</h3>
+			<p>Zadali jste správnou adrasu? Vypadá to, že Vámi hledaná aktualita neexistuje.</p>
+			<a n:href="Homepage:" class="btn btn-outline-primary">Zpět na úvodní stránku</a>
+		{/ifset}
+	</section>
+{/block}

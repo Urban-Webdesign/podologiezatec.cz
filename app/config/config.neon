@@ -2,6 +2,9 @@ php:
 	date.timezone: Europe/Prague
 	output_buffering: 4096
 
+session:
+	autoStart: true
+
 application:
 	errorPresenter: Front:Error
 	mapping:
@@ -9,7 +12,14 @@ application:
 
 services:
 	router: App\RouterFactory::createRouter()
+	- App\AdminModule\Grid\ServiceGridFactory
+	- App\Model\ServiceModel
 
 parameters:
 	customTemplatesDir: %appDir%/FrontModule/templates/
+	admin:
+		menu:
+			Služby: [':Admin:Service:', spa]
 
+extensions:
+    recaptcha: Contributte\ReCaptcha\DI\ReCaptchaExtension

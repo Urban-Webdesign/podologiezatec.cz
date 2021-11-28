@@ -1,0 +1,23 @@
+{block #content}
+	<section class="news-page secondary-page container">
+		<div class="content">
+			<h1 n:block="title">Aktuality</h1>
+
+			<div n:ifset="$news" class="news-grid mt-4">
+				{foreach $news as $new}
+					<a n:href="New:show $new->slug" class="new">
+						{if $new->cover != NULL}
+							<img src="{$basePath}/upload/news/{$new->id}/{$new->cover}" alt="{$new->title}">
+						{else}
+							<img src="{$basePath}/dist/img/nocover.jpeg" alt="{$new->title}">
+						{/if}
+						<h4>{$new->title}</h4>
+						<span class="date">{$new->created|date:'d. m. Y'}</span>
+					</a>
+				{/foreach}
+			</div>
+
+			<a n:href="Homepage:" class="btn btn-secondary">Zpět na úvodní stránku</a>
+		</div>
+	</section>
+{/block}
