@@ -1,3 +1,156 @@
 {block #content}
+	<header class="container">
+		<div class="content">
+			<h1>Dopřejte svým nohám péči, kterou si zaslouží</h1>
+			<div class="cta-btns">
+				<span class="before"></span>
+				<a n:href="Reservation:" class="btn btn-primary btn-lg">Online rezervace</a>
+				<a n:href="Homepage:#nase-sluzby" class="btn btn-light btn-lg">Naše služby</a>
+				<span class="after"></span>
+			</div>
+		</div>
+		<img src="{$basePath}/dist/img/header.jpg" alt="Header image">
+		<div class="scroll-down"></div>
+	</header>
 
+	<section class="services container" id="nase-sluzby">
+		<img src="{$basePath}/dist/img/services.jpg" alt="Services image">
+		<div class="content">
+			<h2>Naše služby</h2>
+			<ul n:ifset="$services">
+				{foreach $services as $service}
+					<li><a n:href="Service:show $service->slug">{$service->name}</a></li>
+				{/foreach}
+			</ul>
+		</div>
+	</section>
+
+	<section class="pricing" id="cenik">
+		<div class="container">
+			<div class="content">
+				<h2>Ceník</h2>
+				{box cenik}
+			</div>
+			<img src="{$basePath}/dist/img/pricing.jpg" alt="Pricing image">
+		</div>
+		<div class="bg"></div>
+	</section>
+
+	<section class="news container" id="aktuality">
+		<h2>Aktuality</h2>
+		<div n:ifset="$news" class="news-grid">
+			{foreach $news as $new}
+				<a n:href="New:show $new->slug" class="new">
+					{if $new->cover != NULL}
+						<img src="{$basePath}/upload/news/{$new->id}/{$new->cover}" alt="{$new->title}">
+					{else}
+						<img src="{$basePath}/dist/img/nocover.jpeg" alt="{$new->title}">
+					{/if}
+					<h4>{$new->title}</h4>
+					<span class="date">{$new->created|date:'d. m. Y'}</span>
+				</a>
+			{/foreach}
+
+			<a n:href="New:default" class="next-new">
+				<svg viewBox="0 0 39 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path fill-rule="evenodd" clip-rule="evenodd" d="M-3.77207e-07 12.5C-3.88321e-07 12.1317 0.146308 11.7785 0.406739 11.518C0.667169 11.2576 1.02039 11.1113 1.38869 11.1113L34.1424 11.1113L25.402 2.37364C25.1412 2.11288 24.9947 1.75922 24.9947 1.39045C24.9947 1.02168 25.1412 0.668011 25.402 0.40725C25.6627 0.14649 26.0164 -1.64728e-06 26.3852 -1.67063e-06C26.754 -1.69398e-06 27.1076 0.14649 27.3684 0.40725L38.4779 11.5168C38.6073 11.6458 38.7099 11.799 38.7799 11.9678C38.8499 12.1365 38.8859 12.3173 38.8859 12.5C38.8859 12.6827 38.8499 12.8635 38.7799 13.0322C38.7099 13.201 38.6073 13.3542 38.4779 13.4832L27.3684 24.5927C27.1076 24.8535 26.754 25 26.3852 25C26.0164 25 25.6628 24.8535 25.402 24.5927C25.1412 24.332 24.9947 23.9783 24.9947 23.6096C24.9947 23.2408 25.1412 22.8871 25.402 22.6264L34.1424 13.8887L1.38869 13.8887C1.02039 13.8887 0.667169 13.7424 0.406739 13.482C0.146308 13.2215 -3.66092e-07 12.8683 -3.77207e-07 12.5Z"/>
+				</svg>
+			</a>
+		</div>
+	</section>
+
+	<section class="contact container" id="kontakt">
+		<h2>Kontakt</h2>
+		<div class="contact-grid">
+			<div class="contact-info">
+				<ul>
+					<li>
+						<a href="tel:{$vars->phone}">
+							<svg viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M26.6248 22.4514L22.8181 26.2276C22.2562 26.8039 21.5114 26.9991 20.786 27C17.5782 26.9039 14.546 25.3282 12.0564 23.7102C7.96995 20.7372 4.22042 17.0509 1.86714 12.5962C0.964579 10.7282 -0.094451 8.34475 0.00673155 6.2597C0.0157541 5.47535 0.227119 4.70556 0.779517 4.19998L4.5862 0.395209C5.37667 -0.277158 6.14111 -0.0446882 6.64696 0.738492L9.70945 6.54579C10.0318 7.23377 9.84688 7.97092 9.36597 8.46252L7.9635 9.86427C7.87692 9.98287 7.82179 10.1179 7.8204 10.2648C8.35819 12.3465 9.98744 14.2653 11.4267 15.5857C12.866 16.9062 14.413 18.6952 16.4212 19.1187C16.6694 19.1879 16.9735 19.2123 17.1511 19.0472L18.7825 17.388C19.3449 16.9617 20.157 16.7533 20.7574 17.1019H20.786L26.31 20.3631C27.1209 20.8714 27.2055 21.8538 26.6248 22.4514Z"/>
+							</svg><span>{$vars->phone}</span>
+						</a>
+					</li>
+					<li>
+						<a href="mailto:{$vars->email}">
+							<svg viewBox="0 0 26 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M19.0947 16.4204C19.0947 17.5491 19.4158 17.9993 20.2557 17.9993C22.1275 17.9993 23.3194 15.6141 23.3194 11.6474C23.3194 5.58436 18.9012 2.68186 13.3851 2.68186C7.71044 2.68186 2.54909 6.48736 2.54909 13.6791C2.54909 20.5484 7.06409 24.2894 13.9978 24.2894C16.3521 24.2894 17.9323 24.0314 20.3498 23.2251L20.8684 25.3845C18.4819 26.1599 15.9315 26.3843 13.9656 26.3843C4.87109 26.3843 0 21.3855 0 13.6778C0 5.90552 5.64509 0.616516 13.4173 0.616516C21.5121 0.616516 25.8 5.45402 25.8 11.388C25.8 16.419 24.2211 20.2568 19.2546 20.2568C16.9958 20.2568 15.5136 19.3538 15.3201 17.3529C14.7396 19.5782 13.1916 20.2568 11.094 20.2568C8.28825 20.2568 5.934 18.0947 5.934 13.7423C5.934 9.35627 7.99934 6.64727 11.7081 6.64727C13.6753 6.64727 14.9008 7.42127 15.4464 8.64677L16.383 6.93752H19.092V16.4204H19.0947ZM15.1293 12.1634C15.1293 10.391 13.8057 9.64786 12.7092 9.64786C11.5159 9.64786 10.195 10.614 10.195 13.4534C10.195 15.7109 11.1948 16.9686 12.7092 16.9686C13.7734 16.9686 15.1293 16.2914 15.1293 14.4209V12.1634Z"/>
+							</svg><span>{$vars->email}</span>
+						</a>
+					</li>
+					<li>
+						<svg class="pin" viewBox="0 0 79 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M39.2858 0C28.8703 0.0122874 18.885 4.15525 11.5201 11.5201C4.15529 18.8849 0.0123292 28.8703 4.1796e-05 39.2857C-0.0124328 47.7972 2.76783 56.0778 7.91433 62.8571C7.91433 62.8571 8.98576 64.2679 9.16076 64.4714L39.2858 100L69.425 64.4536C69.5822 64.2643 70.6572 62.8571 70.6572 62.8571L70.6608 62.8464C75.8047 56.07 78.5837 47.7933 78.5715 39.2857C78.5592 28.8703 74.4162 18.8849 67.0514 11.5201C59.6865 4.15525 49.7012 0.0122874 39.2858 0V0ZM39.2858 53.5714C36.4603 53.5714 33.6983 52.7336 31.349 51.1639C28.9998 49.5941 27.1687 47.363 26.0875 44.7526C25.0062 42.1422 24.7233 39.2699 25.2745 36.4987C25.8258 33.7276 27.1863 31.1821 29.1842 29.1842C31.1821 27.1863 33.7276 25.8257 36.4988 25.2745C39.2699 24.7233 42.1423 25.0062 44.7527 26.0874C47.363 27.1687 49.5942 28.9997 51.1639 31.349C52.7336 33.6983 53.5715 36.4603 53.5715 39.2857C53.5667 43.0731 52.0601 46.704 49.3821 49.382C46.704 52.0601 43.0731 53.5667 39.2858 53.5714V53.5714Z"/>
+						</svg><span class="address">{$vars->address}</span>
+					</li>
+					<li>
+						<a n:href="this">
+							<svg viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M15.796 13.7C15.884 12.974 15.95 12.248 15.95 11.5C15.95 10.752 15.884 10.026 15.796 9.3H19.514C19.69 10.004 19.8 10.741 19.8 11.5C19.8 12.259 19.69 12.996 19.514 13.7H15.796ZM13.849 19.816C14.509 18.595 15.015 17.275 15.367 15.9H18.612C17.5463 17.7351 15.8555 19.1252 13.849 19.816ZM13.574 13.7H8.426C8.316 12.974 8.25 12.248 8.25 11.5C8.25 10.752 8.316 10.015 8.426 9.3H13.574C13.673 10.015 13.75 10.752 13.75 11.5C13.75 12.248 13.673 12.974 13.574 13.7ZM11 20.256C10.087 18.936 9.35 17.473 8.899 15.9H13.101C12.65 17.473 11.913 18.936 11 20.256ZM6.6 7.1H3.388C4.44274 5.25994 6.13228 3.86764 8.14 3.184C7.48 4.405 6.985 5.725 6.6 7.1ZM3.388 15.9H6.6C6.985 17.275 7.48 18.595 8.14 19.816C6.13649 19.1248 4.44933 17.7345 3.388 15.9ZM2.486 13.7C2.31 12.996 2.2 12.259 2.2 11.5C2.2 10.741 2.31 10.004 2.486 9.3H6.204C6.116 10.026 6.05 10.752 6.05 11.5C6.05 12.248 6.116 12.974 6.204 13.7H2.486ZM11 2.733C11.913 4.053 12.65 5.527 13.101 7.1H8.899C9.35 5.527 10.087 4.053 11 2.733ZM18.612 7.1H15.367C15.0227 5.7376 14.5129 4.42249 13.849 3.184C15.873 3.877 17.556 5.274 18.612 7.1ZM11 0.5C4.917 0.5 0 5.45 0 11.5C0 14.4174 1.15893 17.2153 3.22183 19.2782C4.24327 20.2996 5.4559 21.1099 6.79048 21.6627C8.12506 22.2155 9.55546 22.5 11 22.5C13.9174 22.5 16.7153 21.3411 18.7782 19.2782C20.8411 17.2153 22 14.4174 22 11.5C22 10.0555 21.7155 8.62506 21.1627 7.29048C20.6099 5.9559 19.7996 4.74327 18.7782 3.72183C17.7567 2.70038 16.5441 1.89013 15.2095 1.33733C13.8749 0.784523 12.4445 0.5 11 0.5Z"/>
+							</svg><span>podologiezatec.cz</span>
+						</a>
+					</li>
+					<li>
+						<svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M22 42C33.046 42 42 33.046 42 22C42 10.954 33.046 2 22 2C10.954 2 2 10.954 2 22C2 33.046 10.954 42 22 42Z" stroke="black" stroke-width="4" stroke-linejoin="round" fill="white"/>
+							<path d="M22.0078 10V22.009L30.4868 30.489" stroke="black" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+						<div class="opening">
+							{box oteviraci_doba}
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="contact-form">
+				<h3>Napište nám</h3>
+
+				{foreach $flashes as $flash}
+					<div class="alert alert-{$flash->type} alert-dismissible fade show" style="max-width: 500px" role="alert">
+						{$flash->message}
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+				{/foreach}
+
+				{form contactForm, class => 'row'}
+					<div class="col-lg-12">
+						<div class="form-group">
+							{label name}{/label}
+								{input name class => 'form-control, required'}
+						</div>
+					</div>
+
+					<div class="col-lg-6">
+						<div class="form-group">
+							{label phone}{/label}
+								{input phone class => 'form-control, required'}
+						</div>
+					</div>
+
+					<div class="col-lg-6">
+						<div class="form-group">
+							{label email}{/label}
+								{input email class => 'form-control, required'}
+						</div>
+					</div>
+
+					<div class="col-lg-12">
+						<div class="form-group">
+							{label message}{/label}
+								{input message class => 'form-control, required', rows => 5}
+						</div>
+					</div>
+
+					<div class="col-lg-6">
+						<div class="form-group">
+							<button n:name="submit" class="btn btn-lg btn-primary submit">
+								Odeslat
+							</button>
+						</div>
+					</div>
+				{/form}
+			</div>
+		</div>
+	</section>
 {/block}

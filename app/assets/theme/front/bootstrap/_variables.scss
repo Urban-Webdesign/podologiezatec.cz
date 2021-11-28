@@ -1,9 +1,20 @@
 // Variables
 //
-// Variables should follow the `$component-state-property-size` formula for
+// Variables should follow the `$Component-state-property-size` formula for
 // consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
 
 // Color system
+$sand-light: #FFF7E3;
+$sand-bg: #FAF1D9;
+$sand-border: #F2E5C2;
+$sand-form: #FAEFD2;
+$font-heading: #111;
+$font: #222;
+$font-navigation: #333;
+$svg-icons: #555;
+$my-green: #18844E;
+
+
 
 $white:    #fff !default;
 $gray-100: #f8f9fa !default;
@@ -64,13 +75,13 @@ $colors: map-merge(
 		$colors
 );
 
-$primary:       $blue !default;
-$secondary:     $gray-600 !default;
+$primary:       $my-green !default;
+$secondary:     $sand-bg !default;
 $success:       $green !default;
 $info:          $cyan !default;
 $warning:       $yellow !default;
 $danger:        $red !default;
-$light:         $gray-100 !default;
+$light:         $white !default;
 $dark:          $gray-800 !default;
 
 $theme-colors: () !default;
@@ -198,7 +209,9 @@ $grid-breakpoints: (
 	md: 768px,
 	lg: 992px,
 	xl: 1200px,
-	xxl: 1500px
+	xxl: 1400px,
+	xxxl: 1600px,
+	xxxxl: 1700px
 ) !default;
 
 @include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
@@ -213,8 +226,9 @@ $container-max-widths: (
 	sm: 540px,
 	md: 720px,
 	lg: 960px,
-	xl: 1140px,
-	xxl: 1440px
+	xl: 1100px,
+	xxl: 1300px,
+	xxxl: 1440px
 ) !default;
 
 @include _assert-ascending($container-max-widths, "$container-max-widths");
@@ -239,8 +253,8 @@ $line-height-sm:              1.5 !default;
 $border-width:                1px !default;
 $border-color:                $gray-300 !default;
 
-$border-radius:               .25rem !default;
-$border-radius-lg:            .3rem !default;
+$border-radius:               0 !default;
+$border-radius-lg:            0 !default;
 $border-radius-sm:            .2rem !default;
 
 $rounded-pill:                50rem !default;
@@ -294,8 +308,8 @@ $font-weight-bolder:          bolder !default;
 $font-weight-base:            $font-weight-normal !default;
 $line-height-base:            1.5 !default;
 
-$h1-font-size:                $font-size-base * 2.5 !default;
-$h2-font-size:                $font-size-base * 2 !default;
+$h1-font-size:                $font-size-base * 2.8 !default;
+$h2-font-size:                $font-size-base * 2.3 !default;
 $h3-font-size:                $font-size-base * 1.75 !default;
 $h4-font-size:                $font-size-base * 1.5 !default;
 $h5-font-size:                $font-size-base * 1.25 !default;
@@ -348,7 +362,7 @@ $hr-margin-y:                 $spacer !default;
 
 // Tables
 //
-// Customizes the `.table` component with basic values, each used across all table variations.
+// Customizes the `.table` Component with basic values, each used across all table variations.
 
 $table-cell-padding:          .75rem !default;
 $table-cell-padding-sm:       .3rem !default;
@@ -717,7 +731,7 @@ $nav-divider-margin-y:              $spacer / 2 !default;
 
 // Navbar
 
-$navbar-padding-y:                  $spacer / 2 !default;
+$navbar-padding-y:                  $spacer !default;
 $navbar-padding-x:                  $spacer !default;
 
 $navbar-nav-link-padding-x:         .5rem !default;

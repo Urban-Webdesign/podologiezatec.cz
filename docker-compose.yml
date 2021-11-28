@@ -1,0 +1,44 @@
+version: '3'
+
+networks:
+  nginx_proxy_network:
+    external:
+      name: nginx_proxy_network
+
+services:
+  db:
+    image: mariadb:latest
+    networks:
+      - nginx_proxy_network
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: podologiezatec
+    volumes:
+      - .data/mysql:/var/lib/mysql
+
+  db_pma:
+    image: phpmyadmin
+    restart: always
+    networks:
+      - nginx_proxy_network
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      VIRTUAL_HOST: dbpodologiezatec.localhost
+
+  php:
+    image: php8apache2110
+    networks:
+      - nginx_proxy_network
+    expose:
+      - 80
+    volumes:
+      - .:/var/www/html
+      - ./.docker/apache/000-default.conf:/etc/apache2/sites-enabled/000-default.conf
+    environment:
+      NETTE_DEBUG_SECRET: debug
+      VIRTUAL_HOST: podologiezatec.localhost
+      VIRTUAL_PORT: 80
+      LETSENCRYPT_HOST: podologiezatec.localhost
+      LETSENCRYPT_EMAIL: info@filipurban.cz

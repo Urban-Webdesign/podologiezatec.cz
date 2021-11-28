@@ -15,6 +15,14 @@
 		{
 			"type": "git",
 			"url": "git@github.com:K2D-CZ/file.git"
+		},
+		{
+			"type": "git",
+			"url": "git@github.com:K2D-CZ/gallery.git"
+		},
+		{
+			"type": "git",
+			"url": "git@github.com:K2D-CZ/news.git"
 		}
 	],
 	"require": {
@@ -24,11 +32,14 @@
 		"ext-libxml": "*",
 		"ext-simplexml": "*",
 		"ext-xmlwriter": "*",
+		"contributte/recaptcha": "^v3.3.1",
 		"nette/nette": "^3.0.0",
 		"orisai/nette-di": "^1.0.0",
 		"simple-cms/box-module": "dev-master",
 		"simple-cms/core-module": "dev-master",
 		"simple-cms/file-module": "dev-master",
+		"simple-cms/gallery-module": "dev-master",
+		"simple-cms/news-module": "dev-master",
 		"symfony/dotenv": "^5.1",
 		"tracy/tracy": "^2.7.6"
 	},
