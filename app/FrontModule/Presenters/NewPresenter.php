@@ -2,7 +2,9 @@
 
 namespace App\FrontModule\Presenters;
 
+use K2D\Gallery\Models\ImageModel;
 use K2D\News\Models\NewModel;
+use Nette\Utils\Image;
 
 class NewPresenter extends BasePresenter
 {
@@ -10,11 +12,15 @@ class NewPresenter extends BasePresenter
 	/* @inject */
 	public NewModel $newModel;
 
+	/* @inject */
+	public ImageModel $imageModel;
 
-	public function __construct(NewModel $newModel)
+
+	public function __construct(NewModel $newModel, ImageModel $imageModel)
 	{
 		parent::__construct();
 		$this->newModel = $newModel;
+		$this->imageModel = $imageModel;
 	}
 
 	public function renderDefault(): void
@@ -24,6 +30,11 @@ class NewPresenter extends BasePresenter
 
 	public function renderShow($slug): void
 	{
-		$this->template->new = $this->newModel->getNew($slug, 'cs');
+		$new = $this->newModel->getNew($slug, 'cs');
+		$this->template->new = $new;
+
+		// get images
+		if ($new->gallery_id != NULL)
+			$this->template->images = $this->imageModel->getImagesByGallery($new->gallery_id);
 	}
 }

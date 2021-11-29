@@ -3,6 +3,7 @@
 namespace App\FrontModule\Presenters;
 
 use App\Model\ServiceModel;
+use K2D\Gallery\Models\ImageModel;
 
 class ServicePresenter extends BasePresenter
 {
@@ -10,11 +11,15 @@ class ServicePresenter extends BasePresenter
 	/* @inject */
 	public ServiceModel $serviceModel;
 
+	/* @inject */
+	public ImageModel $imageModel;
 
-	public function __construct(ServiceModel $serviceModel)
+
+	public function __construct(ServiceModel $serviceModel, ImageModel $imageModel)
 	{
 		parent::__construct();
 		$this->serviceModel = $serviceModel;
+		$this->imageModel = $imageModel;
 	}
 
 	public function renderDefault(): void
@@ -24,6 +29,11 @@ class ServicePresenter extends BasePresenter
 
 	public function renderShow($slug): void
 	{
-		$this->template->service = $this->serviceModel->getService($slug);
+		$service = $this->serviceModel->getService($slug);
+		$this->template->service = $service;
+
+		// get images
+		if ($service->gallery_id != NULL)
+			$this->template->images = $this->imageModel->getImagesByGallery($service->gallery_id);
 	}
 }
