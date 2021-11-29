@@ -2,6 +2,7 @@
 	<section class="new-page secondary-page container">
 		{ifset $new}
 			<h1 n:block="title">{$new->title}</h1>
+			<div class="date">Datum vytvoření: {$new->created|date:'j. m. Y'}</div>
 			<div class="two-col-grid">
 				<div class="content">
 					{if $new->cover != NULL}
@@ -9,8 +10,18 @@
 					{else}
 						<img src="{$basePath}/dist/img/nocover.jpeg" alt="{$new->title}">
 					{/if}
-					<div class="date">{$new->created|date:'d. m. Y'}</div>
-					<div>{$new->content|noescape}</div>
+					<div class="text">{$new->content|noescape}</div>
+					<div n:ifset="$images" class="gallery">
+						<h3>Galerie</h3>
+						<div class="gallery-grid">
+							{foreach $images as $image}
+								<a href="{$basePath}/upload/galleries/{$new->gallery_id}/{$image->name}" class="gal-img" data-lightbox="gallery" data-name="{$image->name}">
+									<img src="{$basePath}/upload/galleries/{$new->gallery_id}/thumbs/{$image->name}" class="lazyload" alt="{$image->title}">
+								</a>
+							{/foreach}
+						</div>
+					</div>
+
 					<a n:href="Homepage:" class="btn btn-outline-primary">Zpět na úvodní stránku</a>
 				</div>
 			</div>
